@@ -14,6 +14,13 @@
   (major1) == 4 && (major2) <  9 || \
   (major1) == 4 && (major2) == 9 && (minor) <= 1)
 
+/* package containers-0.5.7.1 */
+#define VERSION_containers "0.5.7.1"
+#define MIN_VERSION_containers(major1,major2,minor) (\
+  (major1) <  0 || \
+  (major1) == 0 && (major2) <  5 || \
+  (major1) == 0 && (major2) == 5 && (minor) <= 7)
+
 /* package hspec-2.4.4 */
 #define VERSION_hspec "2.4.4"
 #define MIN_VERSION_hspec(major1,major2,minor) (\
@@ -63,7 +70,7 @@
   (major1) == 0 && (major2) <  68 || \
   (major1) == 0 && (major2) == 68 && (minor) <= 1)
 
-#define CURRENT_COMPONENT_ID "haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B"
+#define CURRENT_COMPONENT_ID "haskell-words-0.1.0.0-2XXNlW3h5Zw9KYzjvtTdls"
 
-#define CURRENT_PACKAGE_KEY "haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B"
+#define CURRENT_PACKAGE_KEY "haskell-words-0.1.0.0-2XXNlW3h5Zw9KYzjvtTdls"
 

@@ -1,24 +1,30 @@
 
 ==================== FINAL INTERFACE ====================
-2017-12-06 02:54:11.399863 UTC
+2017-12-09 22:23:37.764979 UTC
 
 interface haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B:Lib 8002
-  interface hash: dce03b9bef508d129599bec8b71bbf56
-  ABI hash: 3b4ece1059570ba2ec91b62ae21e0dd1
-  export-list hash: 48ba2be00bad7d1e746be9409e408255
+  interface hash: 997f3af1b1272e57cd114f3bbbf93d9c
+  ABI hash: 38c4391bc904d67dd0405b4a7a6f40ed
+  export-list hash: 03a5141deb0d43a5903d7c9416a5e7b3
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: f6624f22fcdd76ed0ac6625466e2d712
   sig of: Nothing
   used TH splices: False
   where
 exports:
+  Lib.cell2char
   Lib.findWord
+  Lib.findWordInCellLinePrefix
   Lib.findWordInLine
   Lib.findWords
   Lib.formatGrid
   Lib.getLines
+  Lib.gridWithCoords
   Lib.outputGrid
   Lib.skew
+  Lib.zipOverGrid
+  Lib.zipOverGridWith
+  Lib.Cell{Lib.Cell Lib.Indent}
 module dependencies:
 package dependencies: base-4.9.1.0* ghc-prim-0.5.0.0
                       integer-gmp-1.0.0.1
@@ -28,15 +34,334 @@ family instance modules: base-4.9.1.0:Control.Applicative
                          base-4.9.1.0:Data.Monoid base-4.9.1.0:Data.Type.Equality
                          base-4.9.1.0:GHC.Generics base-4.9.1.0:GHC.IO.Exception
                          base-4.9.1.0:GHC.TypeLits
-import  -/  base-4.9.1.0:Data.Foldable 3e0b6967a1da89945d0e2d47266337a2
 import  -/  base-4.9.1.0:Data.List 07ae2acca6538aa0800bd0a993ac6ac1
 import  -/  base-4.9.1.0:Data.Maybe d876c4ffe4b3c43755a781e8ad860d88
 import  -/  base-4.9.1.0:Data.OldList 27987919d8da2f92e3f472ca81f730f8
 import  -/  base-4.9.1.0:GHC.Base c4231c43c07e46080a26bf94094c7aa1
 import  -/  base-4.9.1.0:GHC.List ab8c4e523e6c479c549d3bcd5fc4a439
+import  -/  base-4.9.1.0:GHC.Show a027f5ac24879eaba752f44aa90fe511
 import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
 import  -/  base-4.9.1.0:System.IO c9de64c5f5407c4cf1c52500c4d15200
+import  -/  ghc-prim-0.5.0.0:GHC.Classes 0bdf3d057a415ec1b84a7b1994efbe47
 import  -/  ghc-prim-0.5.0.0:GHC.Types 89f8de4f08018c9177c98d979eae0e45
+import  -/  integer-gmp-1.0.0.1:GHC.Integer.Type 318df275d77dcdb18e0006d8d7870c2a
+3075d129fa501d59a72b49a6eb3553c7
+  $fEqCell :: GHC.Classes.Eq Lib.Cell
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:. @ Lib.Cell Lib.$fEqCell_$c== Lib.$fEqCell_$c/= -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fEqCell_$c/= :: Lib.Cell -> Lib.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (a :: Lib.Cell) (b :: Lib.Cell) ->
+                 case Lib.$fEqCell_$c== a b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fEqCell_$c== :: Lib.Cell -> Lib.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (ds :: Lib.Cell) (ds1 :: Lib.Cell) ->
+                 case ds of wild {
+                   Lib.Cell a1 a2
+                   -> case ds1 of wild1 {
+                        Lib.Cell b1 b2
+                        -> case a1 of ww { (,) ww1 ww2 ->
+                           case b1 of ww3 { (,) ww4 ww5 ->
+                           case GHC.Integer.Type.eqInteger# ww1 ww4 of wild2 { DEFAULT ->
+                           case GHC.Prim.tagToEnum# @ GHC.Types.Bool wild2 of wild3 {
+                             GHC.Types.False -> GHC.Types.False
+                             GHC.Types.True
+                             -> case GHC.Integer.Type.eqInteger# ww2 ww5 of wild4 { DEFAULT ->
+                                case GHC.Prim.tagToEnum# @ GHC.Types.Bool wild4 of wild5 {
+                                  GHC.Types.False -> GHC.Types.False
+                                  GHC.Types.True -> GHC.Classes.eqChar a2 b2 } } } } } }
+                        Lib.Indent -> GHC.Types.False }
+                   Lib.Indent
+                   -> case ds1 of wild1 {
+                        Lib.Cell ipv ipv1 -> GHC.Types.False
+                        Lib.Indent -> GHC.Types.True } }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell :: GHC.Classes.Ord Lib.Cell
+  DFunId
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Lib.Cell
+                  Lib.$fEqCell
+                  Lib.$fOrdCell_$ccompare
+                  Lib.$fOrdCell_$c<
+                  Lib.$fOrdCell_$c<=
+                  Lib.$fOrdCell_$c>
+                  Lib.$fOrdCell_$c>=
+                  Lib.$fOrdCell_$cmax
+                  Lib.$fOrdCell_$cmin -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$c< :: Lib.Cell -> Lib.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (a :: Lib.Cell) (b :: Lib.Cell) ->
+                 case a of wild {
+                   Lib.Cell a1 a2
+                   -> case b of wild1 {
+                        Lib.Cell b1 b2
+                        -> case a1 of ww { (,) ww1 ww2 ->
+                           case b1 of ww3 { (,) ww4 ww5 ->
+                           case GHC.Integer.Type.compareInteger ww1 ww4 of wild2 {
+                             GHC.Types.LT -> GHC.Types.True
+                             GHC.Types.EQ
+                             -> case GHC.Integer.Type.compareInteger ww2 ww5 of wild3 {
+                                  GHC.Types.LT -> GHC.Types.True
+                                  GHC.Types.EQ -> GHC.Classes.$fOrdChar_$c< a2 b2
+                                  GHC.Types.GT -> GHC.Types.False }
+                             GHC.Types.GT -> GHC.Types.False } } }
+                        Lib.Indent -> GHC.Types.True }
+                   Lib.Indent -> case b of wild1 { DEFAULT -> GHC.Types.False } }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$c<= :: Lib.Cell -> Lib.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (a :: Lib.Cell) (b :: Lib.Cell) ->
+                 case a of wild {
+                   Lib.Cell a1 a2
+                   -> case b of wild1 {
+                        Lib.Cell b1 b2
+                        -> case a1 of ww { (,) ww1 ww2 ->
+                           case b1 of ww3 { (,) ww4 ww5 ->
+                           case GHC.Integer.Type.compareInteger ww1 ww4 of wild2 {
+                             GHC.Types.LT -> GHC.Types.True
+                             GHC.Types.EQ
+                             -> case GHC.Integer.Type.compareInteger ww2 ww5 of wild3 {
+                                  GHC.Types.LT -> GHC.Types.True
+                                  GHC.Types.EQ -> GHC.Classes.$fOrdChar_$c<= a2 b2
+                                  GHC.Types.GT -> GHC.Types.False }
+                             GHC.Types.GT -> GHC.Types.False } } }
+                        Lib.Indent -> GHC.Types.True }
+                   Lib.Indent
+                   -> case b of wild1 {
+                        Lib.Cell ipv ipv1 -> GHC.Types.False
+                        Lib.Indent -> GHC.Types.True } }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$c> :: Lib.Cell -> Lib.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (a :: Lib.Cell) (b :: Lib.Cell) ->
+                 case a of wild {
+                   Lib.Cell a1 a2
+                   -> case b of wild1 {
+                        Lib.Cell b1 b2
+                        -> case a1 of ww { (,) ww1 ww2 ->
+                           case b1 of ww3 { (,) ww4 ww5 ->
+                           case GHC.Integer.Type.compareInteger ww1 ww4 of wild2 {
+                             GHC.Types.LT -> GHC.Types.False
+                             GHC.Types.EQ
+                             -> case GHC.Integer.Type.compareInteger ww2 ww5 of wild3 {
+                                  GHC.Types.LT -> GHC.Types.False
+                                  GHC.Types.EQ -> GHC.Classes.$fOrdChar_$c> a2 b2
+                                  GHC.Types.GT -> GHC.Types.True }
+                             GHC.Types.GT -> GHC.Types.True } } }
+                        Lib.Indent -> GHC.Types.False }
+                   Lib.Indent
+                   -> case b of wild1 {
+                        Lib.Cell ipv ipv1 -> GHC.Types.True
+                        Lib.Indent -> GHC.Types.False } }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$c>= :: Lib.Cell -> Lib.Cell -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (a :: Lib.Cell) (b :: Lib.Cell) ->
+                 case a of wild {
+                   Lib.Cell a1 a2
+                   -> case b of wild1 {
+                        Lib.Cell b1 b2
+                        -> case a1 of ww { (,) ww1 ww2 ->
+                           case b1 of ww3 { (,) ww4 ww5 ->
+                           case GHC.Integer.Type.compareInteger ww1 ww4 of wild2 {
+                             GHC.Types.LT -> GHC.Types.False
+                             GHC.Types.EQ
+                             -> case GHC.Integer.Type.compareInteger ww2 ww5 of wild3 {
+                                  GHC.Types.LT -> GHC.Types.False
+                                  GHC.Types.EQ -> GHC.Classes.$fOrdChar_$c>= a2 b2
+                                  GHC.Types.GT -> GHC.Types.True }
+                             GHC.Types.GT -> GHC.Types.True } } }
+                        Lib.Indent -> GHC.Types.False }
+                   Lib.Indent -> case b of wild1 { DEFAULT -> GHC.Types.True } }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$ccompare :: Lib.Cell -> Lib.Cell -> GHC.Types.Ordering
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: (\ (a :: Lib.Cell) (b :: Lib.Cell) ->
+                 case a of wild {
+                   Lib.Cell a1 a2
+                   -> case b of wild1 {
+                        Lib.Cell b1 b2
+                        -> case a1 of ww { (,) ww1 ww2 ->
+                           case b1 of ww3 { (,) ww4 ww5 ->
+                           case GHC.Integer.Type.compareInteger ww1 ww4 of wild2 {
+                             GHC.Types.LT -> GHC.Types.LT
+                             GHC.Types.EQ
+                             -> case GHC.Integer.Type.compareInteger ww2 ww5 of wild3 {
+                                  GHC.Types.LT -> GHC.Types.LT
+                                  GHC.Types.EQ -> GHC.Classes.$fOrdChar_$ccompare a2 b2
+                                  GHC.Types.GT -> GHC.Types.GT }
+                             GHC.Types.GT -> GHC.Types.GT } } }
+                        Lib.Indent -> GHC.Types.LT }
+                   Lib.Indent
+                   -> case b of wild1 {
+                        Lib.Cell ipv ipv1 -> GHC.Types.GT
+                        Lib.Indent -> GHC.Types.EQ } }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$cmax :: Lib.Cell -> Lib.Cell -> Lib.Cell
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x1 :: Lib.Cell) (y :: Lib.Cell) ->
+                 case Lib.$fOrdCell_$c<= x1 y of wild {
+                   GHC.Types.False -> x1 GHC.Types.True -> y }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fOrdCell_$cmin :: Lib.Cell -> Lib.Cell -> Lib.Cell
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,U><S,U>,
+     Unfolding: InlineRule (2, True, False)
+                (\ (x1 :: Lib.Cell) (y :: Lib.Cell) ->
+                 case Lib.$fOrdCell_$c<= x1 y of wild {
+                   GHC.Types.False -> y GHC.Types.True -> x1 }) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fShowCell :: GHC.Show.Show Lib.Cell
+  DFunId
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Lib.Cell
+                  Lib.$fShowCell_$cshowsPrec
+                  Lib.$fShowCell_$cshow
+                  Lib.$fShowCell_$cshowList -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fShowCell1 :: Lib.Cell -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (Lib.$fShowCell_$cshowsPrec Lib.$fShowCell2) -}
+53b04d12cc86c363b532f2d175f9426f
+  $fShowCell2 :: GHC.Types.Int
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.I# 0#) -}
+4fc2c2421d7a0b239683bb8207afb1d4
+  $fShowCell3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Indent"#) -}
+e6d9ca9eec59ff2d84d15f69149e61d5
+  $fShowCell4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Cell "#) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fShowCell_$cshow :: Lib.Cell -> GHC.Base.String
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (x1 :: Lib.Cell) ->
+                 Lib.$fShowCell_$cshowsPrec
+                   GHC.Show.shows22
+                   x1
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fShowCell_$cshowList :: [Lib.Cell] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__ @ Lib.Cell Lib.$fShowCell1) -}
+3075d129fa501d59a72b49a6eb3553c7
+  $fShowCell_$cshowsPrec ::
+    GHC.Types.Int -> Lib.Cell -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <L,1*U(U)><S,1*U><L,U>,
+     Unfolding: (\ (a :: GHC.Types.Int)
+                   (ds :: Lib.Cell)
+                   (eta :: GHC.Base.String) ->
+                 case ds of wild {
+                   Lib.Cell b1 b2
+                   -> case a of wild1 { GHC.Types.I# x1 ->
+                      let {
+                        g :: GHC.Base.String -> GHC.Base.String
+                          {- Arity: 1, Strictness: <L,U> -}
+                        = \ (x2 :: GHC.Base.String)[OneShot] ->
+                          case b1 of ww { (,) ww1 ww2 ->
+                          GHC.Types.:
+                            @ GHC.Types.Char
+                            GHC.Show.shows7
+                            (case GHC.Show.$w$cshowsPrec1
+                                    0#
+                                    ww1
+                                    (GHC.Types.:
+                                       @ GHC.Types.Char
+                                       GHC.Show.shows5
+                                       (GHC.Show.$fShow(,)_$sgo
+                                          (GHC.Types.:
+                                             @ GHC.Types.Char
+                                             GHC.Show.shows4
+                                             (GHC.Types.:
+                                                @ GHC.Types.Char
+                                                GHC.Show.showSpace1
+                                                (case b2 of ww4 { GHC.Types.C# ww5 ->
+                                                 case ww5 of ds1 {
+                                                   DEFAULT
+                                                   -> GHC.Types.:
+                                                        @ GHC.Types.Char
+                                                        GHC.Show.shows14
+                                                        (GHC.Show.$wshowLitChar
+                                                           ds1
+                                                           (GHC.Types.:
+                                                              @ GHC.Types.Char
+                                                              GHC.Show.shows14
+                                                              x2))
+                                                   '\''#
+                                                   -> GHC.Base.++
+                                                        @ GHC.Types.Char
+                                                        GHC.Show.shows13
+                                                        x2 } })))
+                                          (\ (w2 :: GHC.Base.String) ->
+                                           case GHC.Show.$w$cshowsPrec1
+                                                  0#
+                                                  ww2
+                                                  w2 of ww4 { (#,#) ww3 ww5 ->
+                                           GHC.Types.: @ GHC.Types.Char ww3 ww5 })
+                                          (GHC.Types.[]
+                                             @ GHC.Show.ShowS))) of ww4 { (#,#) ww3 ww5 ->
+                             GHC.Types.: @ GHC.Types.Char ww3 ww5 }) }
+                      } in
+                      case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.>=# x1 11#) of wild2 {
+                        GHC.Types.False
+                        -> GHC.Base.++ @ GHC.Types.Char Lib.$fShowCell4 (g eta)
+                        GHC.Types.True
+                        -> GHC.Types.:
+                             @ GHC.Types.Char
+                             GHC.Show.shows7
+                             (GHC.Base.++
+                                @ GHC.Types.Char
+                                Lib.$fShowCell4
+                                (g (GHC.Types.: @ GHC.Types.Char GHC.Show.shows4 eta))) } }
+                   Lib.Indent
+                   -> GHC.Base.++ @ GHC.Types.Char Lib.$fShowCell3 eta }) -}
+519360a31ae4caba270c9a7e605de94f
+  $tc'Cell :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   12193415815548918781##
+                   2062404053280143515##
+                   Lib.$trModule
+                   Lib.$tc'Cell1) -}
+d7864cd292fff8bdc47b2eac91c0b146
+  $tc'Cell1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Cell"#) -}
+0cb0f3e43188b2e5a19b64597674e415
+  $tc'Indent :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   14268595697182951052##
+                   4049442411004383689##
+                   Lib.$trModule
+                   Lib.$tc'Indent1) -}
+8cc7f9230c3b99a584710ac56363dbc9
+  $tc'Indent1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "'Indent"#) -}
+1d99e0028851c584346f8967dedc41cc
+  $tcCell :: GHC.Types.TyCon
+  {- HasNoCafRefs, Strictness: m,
+     Unfolding: (GHC.Types.TyCon
+                   12239482859532557973##
+                   2926087570650517179##
+                   Lib.$trModule
+                   Lib.$tcCell1) -}
+7b9416b8f713878a46b2a195458cd980
+  $tcCell1 :: GHC.Types.TrName
+  {- HasNoCafRefs, Strictness: m1,
+     Unfolding: (GHC.Types.TrNameS "Cell"#) -}
 081887f7018a658419a0d92225ebb06a
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -50,124 +375,238 @@ d0343e33bd3e710ec6d5789097acf3c1
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS
                    "haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B"#) -}
-940fd5d9272b4daf5d43dd1ea545476f
-  type Grid = [GHC.Base.String]
-702480b275c76476f7105fa9682ee853
+3075d129fa501d59a72b49a6eb3553c7
+  data Cell
+    = Cell (GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)
+           GHC.Types.Char
+    | Indent
+b8ad00dee4102e7e58328bcd6588fbdc
+  type Grid a = [[a]]
+6f945ffa0c18f9817bd29c6d07828562
+  cell2char :: Lib.Cell -> GHC.Types.Char
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (ds :: Lib.Cell) ->
+                 case ds of wild {
+                   Lib.Cell ds1 c -> c Lib.Indent -> Lib.cell2char1 }) -}
+95101759960496365b9214713e7bec3f
+  cell2char1 :: GHC.Types.Char
+  {- HasNoCafRefs, Strictness: m, Unfolding: (GHC.Types.C# '?'#) -}
+d730cf60ce5b460eb78a93cb81ace6c1
+  coordsGrid ::
+    Lib.Grid (GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)
+  {- Unfolding: (Lib.gridWithCoords_go
+                   Lib.gridWithCoords1
+                   Lib.gridWithCoords_xs) -}
+60aca568a917f40207f5d010ef829fbc
   findWord ::
-    Lib.Grid -> GHC.Base.String -> GHC.Base.Maybe GHC.Base.String
+    Lib.Grid Lib.Cell -> GHC.Base.String -> GHC.Base.Maybe [Lib.Cell]
   {- Arity: 2, HasNoCafRefs, Strictness: <S,U><L,U>,
-     Unfolding: (\ (grid :: Lib.Grid) (word :: GHC.Base.String) ->
-                 letrec {
-                   go :: [[GHC.Types.Char]] -> Data.Monoid.Any
-                     {- Arity: 1, Strictness: <S,1*U> -}
-                   = \ (ds :: [[GHC.Types.Char]]) ->
-                     case ds of wild {
-                       [] -> GHC.Types.False `cast` (Sym (Data.Monoid.N:Any[0]))
-                       : y ys
-                       -> case Data.OldList.isInfixOf
-                                 @ GHC.Types.Char
-                                 GHC.Classes.$fEqChar
-                                 word
-                                 y of wild1 {
-                            GHC.Types.False -> go ys
-                            GHC.Types.True
-                            -> GHC.Types.True `cast` (Sym (Data.Monoid.N:Any[0])) } }
-                 } in
-                 case (go (Lib.getLines grid))
-                        `cast`
-                      (Data.Monoid.N:Any[0]) of wild {
-                   GHC.Types.False -> GHC.Base.Nothing @ GHC.Base.String
-                   GHC.Types.True -> GHC.Base.Just @ GHC.Base.String word }) -}
-786b62f4e0a5a6dfd11054330c7cf289
+     Unfolding: (\ (grid :: Lib.Grid Lib.Cell)
+                   (word :: GHC.Base.String) ->
+                 case Data.Maybe.catMaybes1
+                        @ [Lib.Cell]
+                        (GHC.Base.map
+                           @ [Lib.Cell]
+                           @ (GHC.Base.Maybe [Lib.Cell])
+                           (Lib.findWordInLine word)
+                           (Lib.getLines grid)) of wild {
+                   [] -> GHC.Base.Nothing @ [Lib.Cell]
+                   : a1 ds1 -> GHC.Base.Just @ [Lib.Cell] a1 }) -}
+7441aa597bed8e372c2059a8f6fd3534
+  findWordInCellLinePrefix ::
+    [Lib.Cell]
+    -> GHC.Base.String -> [Lib.Cell] -> GHC.Base.Maybe [Lib.Cell]
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,U><S,1*U><L,1*U> -}
+7e6a093058f0be41c954bd7be3981133
   findWordInLine ::
-    GHC.Base.String -> GHC.Base.String -> GHC.Types.Bool
-  {- Arity: 2, HasNoCafRefs,
-     Unfolding: (Data.OldList.isInfixOf
-                   @ GHC.Types.Char
-                   GHC.Classes.$fEqChar) -}
-6bc4942605d20523e46be244f6b4b9d3
-  findWords :: Lib.Grid -> [GHC.Base.String] -> [GHC.Base.String]
+    GHC.Base.String -> [Lib.Cell] -> GHC.Base.Maybe [Lib.Cell]
+  {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U> -}
+425a640803359d29c89e7b28e51e053a
+  findWords :: Lib.Grid Lib.Cell -> [GHC.Base.String] -> [[Lib.Cell]]
   {- Arity: 2, HasNoCafRefs, Strictness: <L,U><S,1*U>,
      Unfolding: InlineRule (2, True, False)
-                (\ (grid :: Lib.Grid) (words :: [GHC.Base.String]) ->
+                (\ (grid :: Lib.Grid Lib.Cell) (words :: [GHC.Base.String]) ->
                  Data.Maybe.catMaybes1
-                   @ GHC.Base.String
+                   @ [Lib.Cell]
                    (GHC.Base.build
-                      @ (GHC.Base.Maybe GHC.Base.String)
+                      @ (GHC.Base.Maybe [Lib.Cell])
                       (\ @ b1
-                         (c :: GHC.Base.Maybe GHC.Base.String -> b1 -> b1)[OneShot]
+                         (c :: GHC.Base.Maybe [Lib.Cell] -> b1 -> b1)[OneShot]
                          (n :: b1)[OneShot] ->
                        GHC.Base.foldr
                          @ [GHC.Types.Char]
                          @ b1
                          (GHC.Base.mapFB
-                            @ (GHC.Base.Maybe GHC.Base.String)
+                            @ (GHC.Base.Maybe [Lib.Cell])
                             @ b1
                             @ [GHC.Types.Char]
                             c
                             (Lib.findWord grid))
                          n
                          words))) -}
-8fce1011a06b22c0cd564accb350a6f0
-  formatGrid :: Lib.Grid -> GHC.Base.String
+8e5edb7176b894137c25056a6b8cff68
+  formatGrid :: Lib.Grid Lib.Cell -> GHC.Base.String
   {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>,
-     Unfolding: InlineRule (0, True, True) Data.OldList.unlines -}
-e3483c612e719a17a3cba32e03c6d430
-  getLines :: Lib.Grid -> [GHC.Base.String]
+     Unfolding: InlineRule (1, True, False)
+                (\ (x1 :: Lib.Grid Lib.Cell) ->
+                 Data.OldList.unlines
+                   (GHC.Base.build
+                      @ [GHC.Types.Char]
+                      (\ @ b1
+                         (c :: [GHC.Types.Char] -> b1 -> b1)[OneShot]
+                         (n :: b1)[OneShot] ->
+                       GHC.Base.foldr
+                         @ [Lib.Cell]
+                         @ b1
+                         (GHC.Base.mapFB
+                            @ [GHC.Types.Char]
+                            @ b1
+                            @ [Lib.Cell]
+                            c
+                            Lib.formatGrid1)
+                         n
+                         x1))) -}
+bfd94f6a52256994c47348895bcbb460
+  formatGrid1 :: [Lib.Cell] -> [GHC.Types.Char]
+  {- Arity: 1, HasNoCafRefs,
+     Unfolding: (GHC.Base.map
+                   @ Lib.Cell
+                   @ GHC.Types.Char
+                   Lib.cell2char) -}
+9aa24c119b0b701e70b5a494ac87da22
+  getLines :: Lib.Grid Lib.Cell -> [[Lib.Cell]]
   {- Arity: 1, HasNoCafRefs, Strictness: <S,U>,
-     Unfolding: (\ (grid :: Lib.Grid) ->
+     Unfolding: (\ (grid :: Lib.Grid Lib.Cell) ->
                  let {
-                   lines :: [GHC.Base.String]
+                   lines :: [[Lib.Cell]]
                    = GHC.Base.++
-                       @ [GHC.Types.Char]
+                       @ [Lib.Cell]
                        grid
                        (GHC.Base.++
-                          @ [GHC.Types.Char]
-                          (Data.OldList.transpose @ GHC.Types.Char grid)
+                          @ [Lib.Cell]
+                          (Data.OldList.transpose @ Lib.Cell grid)
                           (GHC.Base.++
-                             @ [GHC.Types.Char]
-                             (Data.OldList.transpose @ GHC.Types.Char (Lib.skew grid))
+                             @ [Lib.Cell]
+                             (Data.OldList.transpose @ Lib.Cell (Lib.skew grid))
                              (Data.OldList.transpose
-                                @ GHC.Types.Char
+                                @ Lib.Cell
                                 (Lib.skew
                                    (GHC.Base.map
-                                      @ [GHC.Types.Char]
-                                      @ [GHC.Types.Char]
-                                      (GHC.List.reverse @ GHC.Types.Char)
+                                      @ [Lib.Cell]
+                                      @ [Lib.Cell]
+                                      (GHC.List.reverse @ Lib.Cell)
                                       grid)))))
                  } in
                  GHC.Base.++
-                   @ [GHC.Types.Char]
+                   @ [Lib.Cell]
                    lines
                    (GHC.Base.map
-                      @ [GHC.Types.Char]
-                      @ [GHC.Types.Char]
-                      (GHC.List.reverse @ GHC.Types.Char)
+                      @ [Lib.Cell]
+                      @ [Lib.Cell]
+                      (GHC.List.reverse @ Lib.Cell)
                       lines)) -}
-3d4ec35dee5704c80f8d2915ba02619a
-  outputGrid :: Lib.Grid -> GHC.Types.IO ()
+d909895755cc3abd8418f6593f3322d1
+  gridWithCoords :: Lib.Grid GHC.Types.Char -> Lib.Grid Lib.Cell
+  {- Arity: 1, Strictness: <L,1*U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ (grid :: Lib.Grid GHC.Types.Char) ->
+                 GHC.Base.build
+                   @ [Lib.Cell]
+                   (\ @ b1
+                      (c1 :: [Lib.Cell] -> b1 -> b1)[OneShot]
+                      (n :: b1)[OneShot] ->
+                    GHC.List.foldr2
+                      @ [(GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)]
+                      @ [GHC.Types.Char]
+                      @ b1
+                      (GHC.List.zipWithFB
+                         @ [Lib.Cell]
+                         @ b1
+                         @ b1
+                         @ [(GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)]
+                         @ [GHC.Types.Char]
+                         c1
+                         (GHC.List.zipWith
+                            @ (GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)
+                            @ GHC.Types.Char
+                            @ Lib.Cell
+                            Lib.Cell))
+                      n
+                      Lib.coordsGrid
+                      grid)) -}
+df672caf84059296e8971708f1470c88
+  gridWithCoords1 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (0) -}
+a81a442a7e6a0782bab49cd65e301f4b
+  gridWithCoords_go ::
+    GHC.Integer.Type.Integer
+    -> [[GHC.Integer.Type.Integer]]
+    -> [[(GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)]]
+  {- Arity: 2, Strictness: <S,1*U><S,1*U> -}
+37b629ed68ddcbfb63a55fd51b6942a8
+  gridWithCoords_xs :: [[GHC.Integer.Type.Integer]]
+c3fc88de18e5d4ccfad9bc4ab7a7654c
+  outputGrid :: Lib.Grid Lib.Cell -> GHC.Types.IO ()
   {- Arity: 2, Strictness: <L,1*U><S,U>,
      Unfolding: InlineRule (0, True, True)
                 Lib.outputGrid1
                   `cast`
-                (<Lib.Grid>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
-b3eaad521050de82c38d9872272fe8b1
+                (<Lib.Grid Lib.Cell>_R ->_R Sym (GHC.Types.N:IO[0] <()>_R)) -}
+eaba25718603f47c6ea5d7730f3c07fd
   outputGrid1 ::
-    Lib.Grid
+    Lib.Grid Lib.Cell
     -> GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 2, Strictness: <L,1*U><S,U>,
      Unfolding: InlineRule (2, True, False)
-                (\ (grid :: Lib.Grid)
+                (\ (grid :: Lib.Grid Lib.Cell)
                    (eta :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
                  GHC.IO.Handle.Text.hPutStr2
                    GHC.IO.Handle.FD.stdout
-                   (Data.OldList.unlines grid)
+                   (Lib.formatGrid grid)
                    GHC.Types.True
                    eta) -}
-1744c43e26355edd3c2af7a19a87e2c1
-  skew :: Lib.Grid -> Lib.Grid
+aca774d8335230d2baea4a4d241ccd48
+  skew :: Lib.Grid Lib.Cell -> Lib.Grid Lib.Cell
   {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U> -}
+3fb186db2d466ed9569559c0d123400a
+  zipOverGrid :: Lib.Grid a -> Lib.Grid b -> Lib.Grid (a, b)
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (\ @ a @ b ->
+                 GHC.List.zipWith @ [a] @ [b] @ [(a, b)] (GHC.List.zip @ a @ b)) -}
+12b29740ede35b2e1941a8e2b5956acb
+  zipOverGridWith ::
+    (a -> b -> c) -> Lib.Grid a -> Lib.Grid b -> Lib.Grid c
+  {- Arity: 3, HasNoCafRefs, Strictness: <L,C(C1(U))><S,1*U><L,1*U>,
+     Unfolding: InlineRule (3, True, False)
+                (\ @ a
+                   @ b
+                   @ c
+                   (x1 :: a -> b -> c)
+                   (eta :: [[a]])
+                   (eta1 :: [[b]]) ->
+                 GHC.Base.build
+                   @ [c]
+                   (\ @ b1 (c1 :: [c] -> b1 -> b1)[OneShot] (n :: b1)[OneShot] ->
+                    GHC.List.foldr2
+                      @ [a]
+                      @ [b]
+                      @ b1
+                      (GHC.List.zipWithFB
+                         @ [c]
+                         @ b1
+                         @ b1
+                         @ [a]
+                         @ [b]
+                         c1
+                         (GHC.List.zipWith @ a @ b @ c x1))
+                      n
+                      eta
+                      eta1)) -}
+instance [safe] GHC.Classes.Eq [Lib.Cell] = Lib.$fEqCell
+instance [safe] GHC.Classes.Ord [Lib.Cell] = Lib.$fOrdCell
+instance [safe] GHC.Show.Show [Lib.Cell] = Lib.$fShowCell
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:

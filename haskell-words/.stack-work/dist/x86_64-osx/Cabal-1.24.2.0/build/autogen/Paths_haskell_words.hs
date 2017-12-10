@@ -30,7 +30,7 @@ version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
 bindir     = "/Users/jvalen652/Desktop/Personal/learning-haskell/haskell-words/.stack-work/install/x86_64-osx/lts-9.14/8.0.2/bin"
-libdir     = "/Users/jvalen652/Desktop/Personal/learning-haskell/haskell-words/.stack-work/install/x86_64-osx/lts-9.14/8.0.2/lib/x86_64-osx-ghc-8.0.2/haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B"
+libdir     = "/Users/jvalen652/Desktop/Personal/learning-haskell/haskell-words/.stack-work/install/x86_64-osx/lts-9.14/8.0.2/lib/x86_64-osx-ghc-8.0.2/haskell-words-0.1.0.0-2XXNlW3h5Zw9KYzjvtTdls"
 dynlibdir  = "/Users/jvalen652/Desktop/Personal/learning-haskell/haskell-words/.stack-work/install/x86_64-osx/lts-9.14/8.0.2/lib/x86_64-osx-ghc-8.0.2"
 datadir    = "/Users/jvalen652/Desktop/Personal/learning-haskell/haskell-words/.stack-work/install/x86_64-osx/lts-9.14/8.0.2/share/x86_64-osx-ghc-8.0.2/haskell-words-0.1.0.0"
 libexecdir = "/Users/jvalen652/Desktop/Personal/learning-haskell/haskell-words/.stack-work/install/x86_64-osx/lts-9.14/8.0.2/libexec"

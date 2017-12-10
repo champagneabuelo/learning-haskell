@@ -1,10 +1,10 @@
 
 ==================== FINAL INTERFACE ====================
-2017-12-06 02:54:11.991729 UTC
+2017-12-09 22:23:38.668373 UTC
 
 interface main@main:Main 8002
-  interface hash: 928c458710c4865084af912e9ae0375b
-  ABI hash: 1c5141906fe18ae9e6c4af31b0362bc1
+  interface hash: 4b7670b1712d13d6886da9298eff4b2a
+  ABI hash: 4c9d98847137ec60d006c62bf5d012ec
   export-list hash: 40ee28a0f5a8f78cc07365b559471abf
   orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
   flag hash: 18890c475136d256121154199ab54742
@@ -26,7 +26,7 @@ family instance modules: base-4.9.1.0:Control.Applicative
 import  -/  base-4.9.1.0:Prelude 22dd289b8469a8fa8dc81cab7b237771
 import  -/  ghc-prim-0.5.0.0:GHC.Types 89f8de4f08018c9177c98d979eae0e45
 import  -/  haskell-words-0.1.0.0@haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B:Data 1cbebd50dcf4a2db416b3a182ec68cf6
-import  -/  haskell-words-0.1.0.0@haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B:Lib 3b4ece1059570ba2ec91b62ae21e0dd1
+import  -/  haskell-words-0.1.0.0@haskell-words-0.1.0.0-1KENKS1h3Aj7RTqdk2mv5B:Lib 38c4391bc904d67dd0405b4a7a6f40ed
 d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule :: GHC.Types.Module
   {- HasNoCafRefs, Strictness: m,
@@ -39,31 +39,43 @@ d6831ef04cb9301b090dfae6f7bb7ec7
   $trModule2 :: GHC.Types.TrName
   {- HasNoCafRefs, Strictness: m1,
      Unfolding: (GHC.Types.TrNameS "main"#) -}
-f27d0272af3181df722fd356069aca22
+bd7ab54cad988ff517b9dcfd7bd48e80
   main :: GHC.Types.IO ()
-  {- Arity: 1, Strictness: <S,U>,
+  {- Arity: 1,
      Unfolding: InlineRule (0, True, True)
                 Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R)) -}
-bb7bec8acfecc3099fb003a1c402eaa8
+70746b89931257025fc3dfa14ea8b826
   main1 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
-  {- Arity: 1, Strictness: <S,U>,
-     Unfolding: InlineRule (1, True, False)
-                (\ (eta :: GHC.Prim.State# GHC.Prim.RealWorld)[OneShot] ->
-                 GHC.IO.Handle.Text.hPutStr2
-                   GHC.IO.Handle.FD.stdout
-                   (Data.OldList.unlines Data.grid)
-                   GHC.Types.True
-                   eta) -}
-7e45d3ee92054fd5f16a4b51443cb521
+  {- Arity: 1, Unfolding: (Lib.outputGrid1 Main.main_gwc) -}
+c9da252850b3528e946968b824f34170
   main2 ::
+    [(GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)]
+    -> [GHC.Types.Char] -> [Lib.Cell]
+  {- Arity: 2, HasNoCafRefs,
+     Unfolding: (GHC.List.zipWith
+                   @ (GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)
+                   @ GHC.Types.Char
+                   @ Lib.Cell
+                   Lib.Cell) -}
+6bc776a935068d2ceabfd2f5b882351b
+  main3 ::
     GHC.Prim.State# GHC.Prim.RealWorld
     -> (# GHC.Prim.State# GHC.Prim.RealWorld, () #)
   {- Arity: 1,
      Unfolding: (GHC.TopHandler.runMainIO1
                    @ ()
                    Main.main1 `cast` (Sym (GHC.Types.N:IO[0] <()>_R))) -}
+ea9e518a868df8de70b64fe97cafed93
+  main_gwc :: Lib.Grid Lib.Cell
+  {- Unfolding: (GHC.List.zipWith
+                   @ [(GHC.Integer.Type.Integer, GHC.Integer.Type.Integer)]
+                   @ [GHC.Types.Char]
+                   @ [Lib.Cell]
+                   Main.main2
+                   Lib.coordsGrid
+                   Data.grid) -}
 vectorised variables:
 vectorised tycons:
 vectorised reused tycons:
