@@ -24,7 +24,7 @@ data Cell = Cell (Integer, Integer) Char
           | Indent 
             deriving (Eq, Ord, Show) 
 
-makeGame :: Grid Char -> 
+-- makeGame :: Grid Char -> 
 
 type Grid a = [[a]]
 
