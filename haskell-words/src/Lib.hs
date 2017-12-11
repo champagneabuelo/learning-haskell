@@ -11,22 +11,68 @@ module Lib
     , gridWithCoords
     , cell2char
     , findWordInCellLinePrefix
+    , makeGame
     , Cell(Cell, Indent)
     , Game(Game)
+    , totalWords
+    , score
+    , formatGame
+    , playGame
+    , completed
     ) where
 import Data.List (isInfixOf, transpose)
 import Data.Maybe (catMaybes, listToMaybe)
 import qualified Data.Map as M
 
-data Game = Game (Grid Cell) (M.Map String (Maybe [Cell])) 
+data Game = Game {
+              gameGrid :: Grid Cell,
+              gameWords :: M.Map String (Maybe [Cell])
+            }
+            deriving Show
 
 data Cell = Cell (Integer, Integer) Char 
           | Indent 
             deriving (Eq, Ord, Show) 
 
--- makeGame :: Grid Char -> 
-
 type Grid a = [[a]]
+
+makeGame :: Grid Char -> [String] -> Game
+makeGame grid words = 
+ let gwc = gridWithCoords grid 
+     tuplify word = (word, Nothing)
+     list = map tuplify words
+     dict = M.fromList list
+ in Game gwc dict 
+
+totalWords :: Game -> Int
+totalWords game = length . M.keys $ gameWords game
+
+score :: Game -> Int 
+score game = length . catMaybes.  M.elems $ gameWords game
+
+completed :: Game -> Bool
+completed game = score game == totalWords game
+
+playGame :: Game -> String -> Game 
+playGame game word | not $ M.member word  (gameWords game) = game
+playGame game word = 
+ let grid = gameGrid game
+     foundWord = findWord grid word
+ in  case foundWord of 
+      Nothing -> game
+      Just cs -> 
+       let dict = gameWords game 
+           newDict = M.insert word foundWord dict
+       in game { gameWords =  newDict }
+
+formatGame :: Game -> String
+formatGame game = 
+ let grid = gameGrid game
+ in formatGrid grid 
+    ++ "\n\n"
+    ++ (show $ score game)
+    ++ "/"
+    ++ (show $ totalWords game)
 
 zipOverGrid :: Grid a -> Grid b -> Grid(a,b)
 zipOverGrid = zipWith zip
